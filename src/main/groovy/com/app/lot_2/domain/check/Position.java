@@ -23,7 +23,7 @@ public class Position {
 
     private BigDecimal sum;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private Check check;
 

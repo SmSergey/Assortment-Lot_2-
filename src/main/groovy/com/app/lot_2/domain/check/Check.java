@@ -11,7 +11,6 @@ import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +24,7 @@ public class Check {
     @Id
     private UUID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private User owner;
 
@@ -34,7 +33,7 @@ public class Check {
     private String cardNumber;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "check", orphanRemoval = true)
+    @OneToMany(mappedBy = "check", orphanRemoval = true, fetch = FetchType.LAZY)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Position> positions;
 

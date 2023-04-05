@@ -7,5 +7,4 @@ import java.util.UUID;
 
 public interface CheckRepository extends JpaRepository<Check, UUID> {
 
-    void deleteAllById(Iterable<? extends UUID> uuids);
 }

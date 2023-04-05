@@ -62,9 +62,8 @@ public class CheckController {
                 .map(positionItemDto -> new Position(positionItemDto.getSum(), check))
                 .toList();
 
-        checkRepository.saveAndFlush(check);
-        userRepository.saveAndFlush(user);
-        positionRepository.saveAllAndFlush(checkPositions);
+        check.setPositions(checkPositions);
+        checkRepository.save(check);
 
         BigDecimal newSum = user.getChecksSum().add(addCheckDto.getSum());
 
@@ -82,7 +81,7 @@ public class CheckController {
         }
 
         user.setPoints(user.getPoints().add(newPoints));
-        userRepository.saveAndFlush(user);
+        userRepository.save(user);
         
         return new CheckAddedDto(check.getId());
     }
@@ -100,10 +99,5 @@ public class CheckController {
         }
 
         return new GetPointsResponse(user.getPoints(), user.getUpdatedAt());
-    }
-
-    @GetMapping("/resetUsers")
-    public void removeAllUsers() {
-        userRepository.deleteAll();
     }
 }
