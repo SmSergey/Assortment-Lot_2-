@@ -9,6 +9,7 @@ import com.app.lot_2.domain.check.repository.CheckRepository;
 import com.app.lot_2.domain.check.repository.PositionRepository;
 import com.app.lot_2.domain.user.User;
 import com.app.lot_2.domain.user.repository.UserRepository;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class CheckController {
     private final UserRepository userRepository;
     private final CheckRepository checkRepository;
     private final PositionRepository positionRepository;
+    private final EntityManager entityManager;
 
     private final BigDecimal BIG_DECIMAL_50_000 = BigDecimal.valueOf(50000);
     private final BigDecimal BIG_DECIMAL_100_000 = BigDecimal.valueOf(50000);
@@ -63,7 +65,7 @@ public class CheckController {
                 .toList();
 
         check.setPositions(checkPositions);
-        checkRepository.save(check);
+        entityManager.persist(check);
 
         BigDecimal newSum = user.getChecksSum().add(addCheckDto.getSum());
 

@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.jpa.repository.Lock;
 
 import java.math.BigDecimal;
 import java.util.Date;
