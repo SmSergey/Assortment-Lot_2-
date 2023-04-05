@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Table(name = "users")
+@Table(name = "users", indexes = @Index(columnList = "cardNumber"))
 @Entity
 @Getter
 @Setter
