@@ -12,7 +12,6 @@ import org.hibernate.annotations.Cascade;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.UUID;
 
 @Table(name = "user_checks")
 @Entity
@@ -22,7 +21,8 @@ import java.util.UUID;
 public class Check {
 
     @Id
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
@@ -37,12 +37,8 @@ public class Check {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Position> positions;
 
-    public Check(UUID id) {
-        this.id = id;
-    }
 
     public Check(User owner, BigDecimal sum, String cardNumber) {
-        this.id = UUID.randomUUID();
         this.owner = owner;
         this.sum = sum;
         this.cardNumber = cardNumber;

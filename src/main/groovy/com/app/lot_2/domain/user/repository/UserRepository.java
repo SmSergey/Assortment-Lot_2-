@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Lock;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByCardNumber(String cardNumber);
 
     @Lock(value = LockModeType.PESSIMISTIC_WRITE)
